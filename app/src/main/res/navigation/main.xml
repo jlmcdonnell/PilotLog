@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    app:startDestination="@+id/logEntry">
+
+    <fragment
+        android:id="@+id/logEntry"
+        android:name="dev.mcd.pilotlog.ui.entry.LogEntryFragment">
+        <action
+            android:id="@+id/logEntryToSelectDestination"
+            app:destination="@id/selectDestination" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/selectDestination"
+        android:name="dev.mcd.pilotlog.ui.destination.SelectDestinationFragment">
+        <argument
+            android:name="params"
+            app:argType="dev.mcd.pilotlog.ui.destination.SelectDestinationParams" />
+        <action
+            android:id="@+id/selectDestinationToAddDestination"
+            app:destination="@id/addDestination" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/addDestination"
+        android:name="dev.mcd.pilotlog.ui.destination.AddDestinationFragment" />
+
+</navigation>

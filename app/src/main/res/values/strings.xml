@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Pilot Log</string>
+
+    <string name="entry_date">Date</string>
+    <string name="entry_hint_hoc">HOC</string>
+    <string name="entry_aircraft">Aircraft</string>
+    <string name="entry_type">Type</string>
+    <string name="entry_reg">Reg</string>
+    <string name="entry_captain">Captain</string>
+    <string name="entry_journey">Journey</string>
+    <string name="entry_from">From</string>
+    <string name="entry_to">To</string>
+    <string name="entry_flying_times">Flying Times</string>
+
+    <string name="aircraft_select_registration">Registration</string>
+    <string name="aircraft_select_type">Type</string>
+
+    <string name="add_destination_name">Name</string>
+    <string name="add_destination_icao">ICAO (Optional)</string>
+    <string name="add_destination_add">Add</string>
+
+    <string name="select_destination_filter">Filter</string>
+
+    <string name="destination_view_select">Select Destination</string>
+
+    <string name="destination_select">Select</string>
+    <string name="entry_journey_from">From</string>
+    <string name="entry_journey_to">To</string>
+    <string name="select_destination_new">New</string>
+    <string name="aircraft_select_multi_engine">Multi-Engine</string>
+</resources>
