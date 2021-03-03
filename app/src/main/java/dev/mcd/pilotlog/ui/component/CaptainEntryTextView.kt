@@ -28,7 +28,6 @@ class CaptainEntryTextView @JvmOverloads constructor(
     lateinit var captainRepository: CaptainRepository
 
     private val scope = CoroutineScope(Dispatchers.Main)
-    private var cachedText = text.toString()
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -55,11 +54,7 @@ class CaptainEntryTextView @JvmOverloads constructor(
     private fun setupTextWatcher() {
         addTextChangedListener(afterTextChanged = {
             val text = it.toString()
-
-            if (text != cachedText) {
-                cachedText = text
-                onCaptainUpdated?.invoke(text)
-            }
+            onCaptainUpdated?.invoke(text)
         })
     }
 

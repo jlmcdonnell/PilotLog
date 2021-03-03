@@ -16,7 +16,10 @@ class NewEntryRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateEntry(entry: Entry) {
-        dataStore.save(entry)
+        val existing = getEntry()
+        if (entry != existing) {
+            dataStore.save(entry)
+        }
     }
 
     override suspend fun getEntry(): Entry {
