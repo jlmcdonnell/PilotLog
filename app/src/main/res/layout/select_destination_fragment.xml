@@ -13,12 +13,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/select_destination_filter"
-        app:layout_constraintEnd_toStartOf="@id/newDestination"
+        app:layout_constraintEnd_toStartOf="@id/newDestinationButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/newDestination"
+        android:id="@+id/newDestinationButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -30,10 +31,13 @@
         app:layout_constraintTop_toTopOf="@id/filterEditText" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/destinationList"
+        android:id="@+id/destinationListView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

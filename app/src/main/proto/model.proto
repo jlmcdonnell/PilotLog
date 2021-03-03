@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_package = "dev.mcd.pilotlog.data.entry.serializer";
+option java_multiple_files = true;
+
+message Entry {
+  string date = 1;
+  string captain = 2;
+  string hoc = 3;
+  Aircraft aircraft = 4;
+  Destination fromDestination = 5;
+  Destination toDestination = 6;
+}
+
+message Aircraft {
+  string type = 1;
+  string registration = 2;
+  bool isMulti = 3;
+}
+
+message Aircrafts {
+  repeated Aircraft aircrafts = 1;
+}
+
+message Captains {
+  repeated Captain captains = 1;
+
+}
+
+message Captain {
+  string name = 1;
+}
+
+message Destination {
+  string name = 1;
+  string icao = 2;
+}
+
+message Destinations {
+  repeated Destination destinations = 1;
+}

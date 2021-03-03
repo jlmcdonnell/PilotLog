@@ -1,7 +1,6 @@
 package dev.mcd.pilotlog.util.delegates
 
 import android.widget.EditText
-import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
 class EditTextDelegate(editText: () -> EditText) {

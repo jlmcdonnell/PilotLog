@@ -1,31 +1,44 @@
 <resources>
     <string name="app_name">Pilot Log</string>
+    <string name="generic_error">Something went wrong</string>
+
+    <string name="engine_type_single">Single-Engine</string>
+    <string name="engine_type_multi">Multi-Engine</string>
 
     <string name="entry_date">Date</string>
-    <string name="entry_hint_hoc">HOC</string>
+    <string name="entry_hint_hoc">Holder\'s Operating Capacity</string>
     <string name="entry_aircraft">Aircraft</string>
     <string name="entry_type">Type</string>
     <string name="entry_reg">Reg</string>
     <string name="entry_captain">Captain</string>
-    <string name="entry_journey">Journey</string>
     <string name="entry_from">From</string>
     <string name="entry_to">To</string>
     <string name="entry_flying_times">Flying Times</string>
+    <string name="entry_save">Save</string>
+    <string name="entry_delete">Delete</string>
+    <string name="entry_set_date">Set Date</string>
+    <string name="entry_journey_from">From</string>
+    <string name="entry_journey_to">To</string>
+    <string name="entry_hoc_p1">P1</string>
+    <string name="entry_hoc_put">PUT</string>
 
     <string name="aircraft_select_registration">Registration</string>
     <string name="aircraft_select_type">Type</string>
+    <string name="aircraft_select_multi_engine">Multi-Engine</string>
 
     <string name="add_destination_name">Name</string>
     <string name="add_destination_icao">ICAO (Optional)</string>
     <string name="add_destination_add">Add</string>
 
     <string name="select_destination_filter">Filter</string>
+    <string name="select_destination_new">New</string>
 
     <string name="destination_view_select">Select Destination</string>
 
     <string name="destination_select">Select</string>
-    <string name="entry_journey_from">From</string>
-    <string name="entry_journey_to">To</string>
-    <string name="select_destination_new">New</string>
-    <string name="aircraft_select_multi_engine">Multi-Engine</string>
+
+    <string name="select_aircraft_new_aircraft">New Aircraft</string>
+
+    <string name="add_aircraft_add">Add Aircraft</string>
+    <string name="new_entry_set_aircraft">Set Aircraft</string>
 </resources>

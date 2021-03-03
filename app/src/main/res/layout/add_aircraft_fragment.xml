@@ -4,47 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/typeEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/add_destination_name"
+        android:hint="@string/aircraft_select_type"
         android:imeOptions="actionNext"
         android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/regEditText"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/icaoEditText"
+        android:id="@+id/regEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/add_destination_icao"
+        android:hint="@string/aircraft_select_registration"
         android:imeOptions="actionDone"
         android:inputType="textCapCharacters"
         android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@id/typeEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/typeEditText"
+        app:layout_constraintTop_toTopOf="@id/typeEditText" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/multiEngineSwitch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/aircraft_select_multi_engine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameEditText" />
+        app:layout_constraintTop_toBottomOf="@id/regEditText" />
 
     <Button
         android:id="@+id/addButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/add_destination_add"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add_aircraft_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icaoEditText" />
+        app:layout_constraintTop_toBottomOf="@id/multiEngineSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
