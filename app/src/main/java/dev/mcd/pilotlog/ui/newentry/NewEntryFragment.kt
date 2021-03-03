@@ -63,6 +63,10 @@ class NewEntryFragment : Fragment(R.layout.new_entry_fragment) {
         hocPut.setOnClickListener {
             operatingCapacityEditText.setText(hocPut.text)
         }
+        with(departArrivalEntryView) {
+            provideFragmentManager = { childFragmentManager }
+            onTimesUpdated = { depart, arrive -> }
+        }
     }
 
     private fun setupVM() {

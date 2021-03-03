@@ -19,10 +19,13 @@ class DestinationView @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.destination_view, this)
-        setOnClickListener { onSelectDestinationClicked?.invoke() }
+        backgroundView.setOnClickListener { onSelectDestinationClicked?.invoke() }
 
         context.obtainStyledAttributes(attrs, R.styleable.DestinationView).use {
-            destinationLabel.text = it.getString(R.styleable.DestinationView_destinationLabel)
+            it.getString(R.styleable.DestinationView_destinationLabel).let { label ->
+                destinationLabel.text = label
+                destinationUnsetLabel.text = label
+            }
         }
     }
 
@@ -33,11 +36,15 @@ class DestinationView @JvmOverloads constructor(
         if (destination.name.isNotBlank()) {
             nameText.isVisible = true
             icaoText.isVisible = true
+            destinationLabel.isVisible = true
             selectDestination.isVisible = false
+            destinationUnsetLabel.isVisible = false
         } else {
             nameText.isVisible = false
             icaoText.isVisible = false
+            destinationLabel.isVisible = false
             selectDestination.isVisible = true
+            destinationUnsetLabel.isVisible = true
         }
     }
 }

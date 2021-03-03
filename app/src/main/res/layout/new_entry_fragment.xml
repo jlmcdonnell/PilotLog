@@ -185,7 +185,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="16dp"
                 app:destinationLabel="@string/entry_journey_from"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -199,7 +198,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="16dp"
                 app:destinationLabel="@string/entry_journey_to"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/fromDestination"
@@ -214,13 +212,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toDestination" />
 
-            <TextView
-                android:id="@+id/flyingTimesLabel"
-                android:layout_width="wrap_content"
+            <dev.mcd.pilotlog.ui.component.DepartArrivalEntryView
+                android:id="@+id/departArrivalEntryView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/entry_flying_times"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/journeyDivider" />
 
