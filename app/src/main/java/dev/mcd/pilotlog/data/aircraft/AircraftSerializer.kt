@@ -2,11 +2,11 @@ package dev.mcd.pilotlog.data.aircraft
 
 import androidx.datastore.core.Serializer
 import dev.mcd.pilotlog.data.entry.serializer.Aircrafts
-import dev.mcd.pilotlog.data.entry.serializer.Aircraft as AircraftProto
 import dev.mcd.pilotlog.domain.aircraft.Aircraft
 import dev.mcd.pilotlog.domain.aircraft.EngineType
 import java.io.InputStream
 import java.io.OutputStream
+import dev.mcd.pilotlog.data.entry.serializer.Aircraft as AircraftProto
 
 object AircraftSerializer : Serializer<Aircrafts> {
     override val defaultValue: Aircrafts
@@ -25,7 +25,7 @@ val Aircraft.serialized: AircraftProto
     get() = AircraftProto.newBuilder()
         .setType(type)
         .setRegistration(registration)
-        .setIsMulti(engineType == EngineType.Multi)
+        .setIsMulti(engineType==EngineType.Multi)
         .build()
 
 val AircraftProto.toDomain
@@ -34,4 +34,3 @@ val AircraftProto.toDomain
         registration = registration,
         engineType = if (isMulti) EngineType.Multi else EngineType.Single,
     )
-

@@ -6,31 +6,38 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import dagger.hilt.android.AndroidEntryPoint
 import dev.mcd.pilotlog.R
+import dev.mcd.pilotlog.domain.time.TimeProvider
+import dev.mcd.pilotlog.domain.time.TimeString
+import dev.mcd.pilotlog.domain.time.isValidTime
 import kotlinx.android.synthetic.main.depart_arrival_entry_view.view.*
 import java.time.LocalTime
-import java.time.format.DateTimeFormatterBuilder
-import java.time.temporal.ChronoField
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DepartArrivalEntryView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    lateinit var onTimesUpdated: (arrival: LocalTime, departure: LocalTime) -> Unit
+    @Inject
+    lateinit var timeProvider: TimeProvider
+
+    lateinit var onTimesUpdated: (departure: TimeString, arrival: TimeString) -> Unit
     lateinit var provideFragmentManager: () -> FragmentManager
 
-    private var arrival: LocalTime? = null
+    var arrival: TimeString? = null
         set(value) {
             field = value
-            handleTimeUpdate()
+            arrivalTimeText.text = field
         }
 
-    private var departure: LocalTime? = null
+    var departure: TimeString? = null
         set(value) {
             field = value
-            handleTimeUpdate()
+            departureTimeText.text = field
         }
 
     init {
@@ -48,9 +55,10 @@ class DepartArrivalEntryView @JvmOverloads constructor(
         var minute = 0
         var hour = 0
 
-        if (!forDeparture && departure != null) {
-            minute = departure!!.minute
-            hour = departure!!.hour
+        if (!forDeparture && departure!=null) {
+            val departureTime = timeProvider.parseTime(departure!!)
+            minute = departureTime.minute
+            hour = departureTime.hour
         }
         MaterialTimePicker.Builder()
             .setMinute(minute)
@@ -58,37 +66,22 @@ class DepartArrivalEntryView @JvmOverloads constructor(
             .setInputMode(MaterialTimePicker.INPUT_MODE_KEYBOARD)
             .setTimeFormat(TimeFormat.CLOCK_24H)
             .build()
-            .also { picker ->
-                picker.addOnPositiveButtonClickListener {
-                    val time = LocalTime.of(picker.hour, picker.minute)
+            .apply {
+                addOnPositiveButtonClickListener {
+                    val time = LocalTime.of(this.hour, this.minute)
+                    val timeString = timeProvider.formatTime(time)
 
                     if (forDeparture) {
-                        departure = time
+                        departure = timeString
                     } else {
-                        arrival = time
+                        arrival = timeString
+                    }
+
+                    if (arrival.isValidTime && departure.isValidTime) {
+                        onTimesUpdated(departure!!, arrival!!)
                     }
                 }
-                picker.showNow(provideFragmentManager(), null)
+                showNow(provideFragmentManager(), null)
             }
-
-    }
-
-    private fun handleTimeUpdate() {
-        val dtf = DateTimeFormatterBuilder()
-            .appendValue(ChronoField.HOUR_OF_DAY)
-            .appendLiteral(":")
-            .appendValue(ChronoField.MINUTE_OF_HOUR, 2)
-            .toFormatter()
-
-        arrival?.let {
-            arrivalTimeText.text = dtf.format(it)
-        }
-        departure?.let {
-            departureTimeText.text = dtf.format(it)
-        }
-
-        if (arrival != null && departure != null) {
-            onTimesUpdated(arrival!!, departure!!)
-        }
     }
 }

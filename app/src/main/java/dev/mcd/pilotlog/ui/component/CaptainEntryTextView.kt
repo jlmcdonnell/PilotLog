@@ -52,10 +52,12 @@ class CaptainEntryTextView @JvmOverloads constructor(
     }
 
     private fun setupTextWatcher() {
-        addTextChangedListener(afterTextChanged = {
-            val text = it.toString()
-            onCaptainUpdated?.invoke(text)
-        })
+        addTextChangedListener(
+            afterTextChanged = {
+                val text = it.toString()
+                onCaptainUpdated?.invoke(text)
+            }
+        )
     }
 
     private fun updateAdapter(results: List<String>) {

@@ -23,12 +23,12 @@ class CaptainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun save(captain: Captain) {
-        dataStore.updateData {
-            it.also {
-                if (it.captainsList.none { c -> Captain(c.name) == captain }) {
-                    it.captainsList.add(captain.serializer)
-                }
-            }
+        dataStore.updateData { captains ->
+            return@updateData if (captains.captainsList.none { c -> Captain(c.name)==captain }) {
+                captains.toBuilder()
+                    .addCaptains(captain.serializer)
+                    .build()
+            } else captains
         }
     }
 }

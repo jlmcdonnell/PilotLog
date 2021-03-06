@@ -34,10 +34,10 @@ class DestinationDataStoreImpl @Inject constructor(
 
     override suspend fun save(destination: Destination) {
         val existing = dataStore.data.first().destinationsList.indexOfFirst {
-            it.toDomain == destination
+            it.toDomain==destination
         }
 
-        if (existing != -1) {
+        if (existing!=-1) {
             return
         }
 
@@ -53,7 +53,7 @@ class DestinationDataStoreImpl @Inject constructor(
             it.toBuilder()
                 .removeDestinations(
                     it.destinationsList.indexOfFirst { d ->
-                        d.toDomain == destination
+                        d.toDomain==destination
                     }
                 )
                 .build()

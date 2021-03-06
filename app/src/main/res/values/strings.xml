@@ -22,6 +22,21 @@
     <string name="entry_hoc_p1">P1</string>
     <string name="entry_hoc_put">PUT</string>
     <string name="entry_set_time">Set Time</string>
+    <string name="entry_error_dialog_title">Unable to save entry</string>
+    <string name="entry_error_aircraft">Aircraft entry required</string>
+    <string name="entry_error_arrivalTime">Arrival time required</string>
+    <string name="entry_error_captain">Captain entry required</string>
+    <string name="entry_error_date">Date entry required</string>
+    <string name="entry_error_departureTime">Departure time required</string>
+    <string name="entry_error_fromDestination">Departure location required</string>
+    <string name="entry_error_holdersOperatingCapacity">Holder\'s operating capacity required</string>
+    <string name="entry_error_landingCount">Invalid landing count</string>
+    <string name="entry_error_secondsDay">Invalid flying time (day)</string>
+    <string name="entry_error_secondsNight">Invalid flying time (night)</string>
+    <string name="entry_error_secondsInstrument">Invalid flying time (instrument)</string>
+    <string name="entry_error_secondsInstrumentSim">Invalid flying time (simulated instrument)</string>
+    <string name="entry_error_takeOffCount">Invalid take-off count</string>
+    <string name="entry_error_toDestination">Arrival location required</string>
 
     <string name="aircraft_select_registration">Registration</string>
     <string name="aircraft_select_type">Type</string>

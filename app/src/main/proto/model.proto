@@ -3,13 +3,26 @@ syntax = "proto3";
 option java_package = "dev.mcd.pilotlog.data.entry.serializer";
 option java_multiple_files = true;
 
-message Entry {
+message LogbookEntry {
   string date = 1;
   string captain = 2;
   string hoc = 3;
   Aircraft aircraft = 4;
   Destination fromDestination = 5;
   Destination toDestination = 6;
+  string departureTime = 7;
+  string arrivalTime = 8;
+  uint32 secondsDay = 9;
+  uint32 secondsNight = 10;
+  uint32 secondsInstrument = 11;
+  uint32 secondsInstrumentSim = 12;
+  uint32 takeOffCount = 13;
+  uint32 landingCount = 14;
+  string remarks = 15;
+}
+
+message Logbook {
+  repeated LogbookEntry entries = 1;
 }
 
 message Aircraft {

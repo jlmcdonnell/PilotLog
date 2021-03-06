@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    app:startDestination="@+id/newEntry">
+    app:startDestination="@+id/draftEntry">
 
     <fragment
-        android:id="@+id/newEntry"
-        android:name="dev.mcd.pilotlog.ui.newentry.NewEntryFragment">
+        android:id="@+id/draftEntry"
+        android:name="dev.mcd.pilotlog.ui.draftentry.DraftEntryFragment">
         <action
             android:id="@+id/toSelectDestination"
             app:destination="@id/selectDestination" />
@@ -17,10 +17,10 @@
 
     <dialog
         android:id="@+id/selectDestination"
-        android:name="dev.mcd.pilotlog.ui.newentry.destination.SelectDestinationFragment">
+        android:name="dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationFragment">
         <argument
             android:name="params"
-            app:argType="dev.mcd.pilotlog.ui.newentry.destination.SelectDestinationParams" />
+            app:argType="dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationParams" />
 
         <action
             android:id="@+id/toAddDestination"
@@ -29,11 +29,11 @@
 
     <dialog
         android:id="@+id/addDestination"
-        android:name="dev.mcd.pilotlog.ui.newentry.destination.AddDestinationFragment" />
+        android:name="dev.mcd.pilotlog.ui.draftentry.destination.AddDestinationFragment" />
 
     <dialog
         android:id="@+id/selectAircraft"
-        android:name="dev.mcd.pilotlog.ui.newentry.aircraft.SelectAircraftFragment">
+        android:name="dev.mcd.pilotlog.ui.draftentry.aircraft.SelectAircraftFragment">
         <action
             android:id="@+id/toAddAircraft"
             app:destination="@id/addAircraft" />
@@ -41,6 +41,6 @@
 
     <dialog
         android:id="@+id/addAircraft"
-        android:name="dev.mcd.pilotlog.ui.newentry.aircraft.AddAircraftFragment" />
+        android:name="dev.mcd.pilotlog.ui.draftentry.aircraft.AddAircraftFragment" />
 
 </navigation>
