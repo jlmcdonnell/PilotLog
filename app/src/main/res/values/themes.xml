@@ -10,6 +10,13 @@
         <item name="android:statusBarColor">@color/grey1</item>
     </style>
 
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.TextButton"/>
+
+    <style name="TextButton.Negative">
+        <item name="android:textColor">@color/grey1</item>
+        <item name="rippleColor">@color/grey1</item>
+    </style>
+
     <style name="Divider">
         <item name="android:layout_height">@dimen/dividerHeight</item>
         <item name="android:background">@color/grey0</item>

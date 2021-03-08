@@ -3,10 +3,10 @@ package dev.mcd.pilotlog.ui.draftentry
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.mcd.pilotlog.domain.draftentry.DraftEntryRepository
 import dev.mcd.pilotlog.domain.logbook.LogbookEntry
 import dev.mcd.pilotlog.domain.logbook.LogbookEntryError
 import dev.mcd.pilotlog.domain.logbook.SaveLogbookEntry
-import dev.mcd.pilotlog.domain.draftentry.DraftEntryRepository
 import dev.mcd.pilotlog.domain.time.TimeString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -35,10 +35,8 @@ class DraftEntryViewModel @Inject constructor(
             }
     }
 
-    private val latestEntry get() = suspend { newEntries.first() }
-
     val state: SharedFlow<State> get() = _state
-    private val _state = MutableSharedFlow<State>(replay = 1)
+    private val _state = MutableSharedFlow<State>()
 
     fun onDatePicked(date: Long) {
         viewModelScope.launch {
@@ -47,39 +45,40 @@ class DraftEntryViewModel @Inject constructor(
                 .toLocalDate()
                 .toString()
 
-            val update = latestEntry().copy(date = dateString)
-            saveEntry(update)
+            saveEntry {
+                it.copy(date = dateString)
+            }
         }
     }
 
     fun onDepartureArrivalTimesUpdated(departed: TimeString, arrived: TimeString) {
         viewModelScope.launch {
-            val entry = draftEntryRepository.getEntry()
-                .copy(
+            saveEntry {
+                it.copy(
                     departureTime = departed,
                     arrivalTime = arrived,
                 )
-            saveEntry(entry)
+            }
         }
     }
 
     fun onCaptainUpdated(captain: String) {
         viewModelScope.launch {
-            val entry = draftEntryRepository.getEntry()
-                .copy(captain = captain)
-            saveEntry(entry)
+            saveEntry {
+                it.copy(captain = captain)
+            }
         }
     }
 
     fun onOperatingCapacityChanged(operatingCapacity: String) {
         viewModelScope.launch {
-            val entry = draftEntryRepository.getEntry()
-                .copy(holdersOperatingCapacity = operatingCapacity)
-            saveEntry(entry)
+            saveEntry {
+                it.copy(holdersOperatingCapacity = operatingCapacity)
+            }
         }
     }
 
-    fun onDeleteClicked() {
+    fun onDiscardClicked() {
         viewModelScope.launch {
             draftEntryRepository.deleteEntry()
         }
@@ -103,7 +102,8 @@ class DraftEntryViewModel @Inject constructor(
         }
     }
 
-    private suspend fun saveEntry(logbookEntry: LogbookEntry) {
-        draftEntryRepository.updateEntry(logbookEntry)
+    private suspend fun saveEntry(update: (LogbookEntry) -> LogbookEntry) {
+        val entry = draftEntryRepository.getEntry()
+        draftEntryRepository.updateEntry(update(entry))
     }
 }

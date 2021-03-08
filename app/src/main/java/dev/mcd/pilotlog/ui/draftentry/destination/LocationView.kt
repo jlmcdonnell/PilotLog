@@ -7,9 +7,9 @@ import androidx.core.content.res.use
 import androidx.core.view.isVisible
 import dev.mcd.pilotlog.R
 import dev.mcd.pilotlog.domain.destination.Destination
-import kotlinx.android.synthetic.main.destination_view.view.*
+import kotlinx.android.synthetic.main.location_view.view.*
 
-class DestinationView @JvmOverloads constructor(
+class LocationView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -18,11 +18,11 @@ class DestinationView @JvmOverloads constructor(
     var onSelectDestinationClicked: (() -> Unit)? = null
 
     init {
-        inflate(context, R.layout.destination_view, this)
+        inflate(context, R.layout.location_view, this)
         backgroundView.setOnClickListener { onSelectDestinationClicked?.invoke() }
 
-        context.obtainStyledAttributes(attrs, R.styleable.DestinationView).use {
-            it.getString(R.styleable.DestinationView_destinationLabel).let { label ->
+        context.obtainStyledAttributes(attrs, R.styleable.LocationView).use {
+            it.getString(R.styleable.LocationView_destinationLabel).let { label ->
                 destinationLabel.text = label
                 destinationUnsetLabel.text = label
             }

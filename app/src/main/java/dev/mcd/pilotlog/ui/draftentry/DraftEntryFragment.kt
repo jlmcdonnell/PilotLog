@@ -39,8 +39,8 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
     }
 
     private fun setupUI() {
-        deleteButton.setOnClickListener {
-            viewModel.onDeleteClicked()
+        discardButton.setOnClickListener {
+            viewModel.onDiscardClicked()
         }
         captainEditText.onCaptainUpdated = { captain ->
             viewModel.onCaptainUpdated(captain)
@@ -48,10 +48,10 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         operatingCapacityView.onOperatingCapacityChanged = {
             viewModel.onOperatingCapacityChanged(it)
         }
-        fromDestination.onSelectDestinationClicked = {
+        departureLocation.onSelectDestinationClicked = {
             findNavController().navigate(toSelectDestination(ModeFrom))
         }
-        toDestination.onSelectDestinationClicked = {
+        arrivalLocation.onSelectDestinationClicked = {
             findNavController().navigate(toSelectDestination(ModeTo))
         }
         aircraftView.setOnClickListener {
@@ -103,8 +103,8 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         captainEditText.setText(logbookEntry.captain)
         captainEditText.setSelection(captainEditText.length())
         operatingCapacityEditText.setText(logbookEntry.holdersOperatingCapacity)
-        fromDestination.setDestination(logbookEntry.fromDestination)
-        toDestination.setDestination(logbookEntry.toDestination)
+        departureLocation.setDestination(logbookEntry.fromDestination)
+        arrivalLocation.setDestination(logbookEntry.toDestination)
         displayEntryDate(logbookEntry.date)
         displayAircraft(logbookEntry.aircraft)
         departArrivalEntryView.arrival = logbookEntry.arrivalTime
