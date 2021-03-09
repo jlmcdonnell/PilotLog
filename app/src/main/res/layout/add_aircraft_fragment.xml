@@ -52,7 +52,7 @@
         style="@style/TextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="16dp"
         android:text="@string/add_aircraft_add"
         app:layout_constraintBottom_toBottomOf="parent"
