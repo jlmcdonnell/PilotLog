@@ -2,7 +2,7 @@
 
 A simple logbook app to log flight times
 
-[![Demo video](https://user-images.githubusercontent.com/2794581/110432635-4aeef480-80a7-11eb-9928-ef0e87839016.mp4)](https://user-images.githubusercontent.com/2794581/110432635-4aeef480-80a7-11eb-9928-ef0e87839016.mp4)
+[Demo video](https://user-images.githubusercontent.com/2794581/110432635-4aeef480-80a7-11eb-9928-ef0e87839016.mp4)
 
 ## Features
 
