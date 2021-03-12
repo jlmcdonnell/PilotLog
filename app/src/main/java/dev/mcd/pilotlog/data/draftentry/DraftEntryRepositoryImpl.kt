@@ -1,7 +1,7 @@
 package dev.mcd.pilotlog.data.draftentry
 
-import dev.mcd.pilotlog.domain.destination.Destination
 import dev.mcd.pilotlog.domain.draftentry.DraftEntryRepository
+import dev.mcd.pilotlog.domain.location.Location
 import dev.mcd.pilotlog.domain.logbook.LogbookEntry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -26,12 +26,12 @@ class DraftEntryRepositoryImpl @Inject constructor(
         return dataStore.newEntries().first()
     }
 
-    override suspend fun updateToDestination(toDestination: Destination) {
-        dataStore.save(getEntry().copy(toDestination = toDestination))
+    override suspend fun updateArrival(toLocation: Location) {
+        dataStore.save(getEntry().copy(arrival = toLocation))
     }
 
-    override suspend fun updateFromDestination(fromDestination: Destination) {
-        dataStore.save(getEntry().copy(fromDestination = fromDestination))
+    override suspend fun updateDeparture(fromLocation: Location) {
+        dataStore.save(getEntry().copy(departure = fromLocation))
     }
 
     override suspend fun deleteEntry() {

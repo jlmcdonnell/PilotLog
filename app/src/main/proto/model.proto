@@ -8,8 +8,8 @@ message LogbookEntry {
   string captain = 2;
   string hoc = 3;
   Aircraft aircraft = 4;
-  Destination fromDestination = 5;
-  Destination toDestination = 6;
+  Location departure = 5;
+  Location arrival = 6;
   string departureTime = 7;
   string arrivalTime = 8;
   uint32 secondsDay = 9;
@@ -44,11 +44,11 @@ message Captain {
   string name = 1;
 }
 
-message Destination {
+message Location {
   string name = 1;
   string icao = 2;
 }
 
-message Destinations {
-  repeated Destination destinations = 1;
+message Locations {
+  repeated Location location = 1;
 }

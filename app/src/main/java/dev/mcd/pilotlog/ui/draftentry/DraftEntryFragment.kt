@@ -18,10 +18,9 @@ import dev.mcd.pilotlog.domain.logbook.LogbookEntry
 import dev.mcd.pilotlog.domain.logbook.LogbookEntryError
 import dev.mcd.pilotlog.domain.time.DateString
 import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.toSelectAircraft
-import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.toSelectDestination
+import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.toSelectLocation
 import dev.mcd.pilotlog.ui.draftentry.DraftEntryViewModel.State
-import dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationParams.ModeFrom
-import dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationParams.ModeTo
+import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationParams
 import kotlinx.android.synthetic.main.draft_entry_fragment.*
 import kotlinx.android.synthetic.main.operating_capacity_layout.*
 import kotlinx.coroutines.flow.launchIn
@@ -48,13 +47,14 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         operatingCapacityView.onOperatingCapacityChanged = {
             viewModel.onOperatingCapacityChanged(it)
         }
-        departureLocation.onSelectDestinationClicked = {
-            findNavController().navigate(toSelectDestination(ModeFrom))
+        departureLocation.onSelectLocationClicked = {
+            selectDeparture()
         }
-        arrivalLocation.onSelectDestinationClicked = {
-            findNavController().navigate(toSelectDestination(ModeTo))
+        arrivalLocation.onSelectLocationClicked = {
+            selectArrival()
         }
         aircraftView.setOnClickListener {
+            clearInputFocus()
             findNavController().navigate(toSelectAircraft())
         }
         dateView.setOnClickListener {
@@ -87,7 +87,19 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
             .launchIn(lifecycleScope)
     }
 
+    private fun selectDeparture() {
+        clearInputFocus()
+        findNavController().navigate(toSelectLocation(SelectLocationParams.ModeDeparture))
+    }
+
+    private fun selectArrival() {
+        clearInputFocus()
+        findNavController().navigate(toSelectLocation(SelectLocationParams.ModeArrival))
+    }
+
     private fun showDatePicker() {
+        clearInputFocus()
+
         MaterialDatePicker.Builder.datePicker()
             .setSelection(System.currentTimeMillis())
             .build()
@@ -102,11 +114,16 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
     private fun displayEntry(logbookEntry: LogbookEntry) {
         captainEditText.setText(logbookEntry.captain)
         captainEditText.setSelection(captainEditText.length())
+
         operatingCapacityEditText.setText(logbookEntry.holdersOperatingCapacity)
-        departureLocation.setDestination(logbookEntry.fromDestination)
-        arrivalLocation.setDestination(logbookEntry.toDestination)
+        operatingCapacityEditText.setSelection(operatingCapacityEditText.length())
+
+        departureLocation.setLocation(logbookEntry.departure)
+        arrivalLocation.setLocation(logbookEntry.arrival)
+
         displayEntryDate(logbookEntry.date)
         displayAircraft(logbookEntry.aircraft)
+
         departArrivalEntryView.arrival = logbookEntry.arrivalTime
         departArrivalEntryView.departure = logbookEntry.departureTime
     }
@@ -145,15 +162,15 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
             LogbookEntryError.Captain -> R.string.entry_error_captain
             LogbookEntryError.Date -> R.string.entry_error_date
             LogbookEntryError.DepartureTime -> R.string.entry_error_departureTime
-            LogbookEntryError.FromDestination -> R.string.entry_error_fromDestination
-            LogbookEntryError.HoldersOperatingCapacity -> R.string.entry_error_holdersOperatingCapacity
-            LogbookEntryError.LandingCount -> R.string.entry_error_landingCount
-            LogbookEntryError.SecondsDay -> R.string.entry_error_secondsDay
-            LogbookEntryError.SecondsNight -> R.string.entry_error_secondsNight
-            LogbookEntryError.SecondsInstrument -> R.string.entry_error_secondsInstrument
-            LogbookEntryError.SecondsInstrumentSim -> R.string.entry_error_secondsInstrumentSim
-            LogbookEntryError.TakeOffCount -> R.string.entry_error_takeOffCount
-            LogbookEntryError.ToDestination -> R.string.entry_error_toDestination
+            LogbookEntryError.Departure -> R.string.entry_error_departure_location
+            LogbookEntryError.HoldersOperatingCapacity -> R.string.entry_error_holders_operating_capacity
+            LogbookEntryError.LandingCount -> R.string.entry_error_landing_count
+            LogbookEntryError.SecondsDay -> R.string.entry_error_seconds_day
+            LogbookEntryError.SecondsNight -> R.string.entry_error_seconds_night
+            LogbookEntryError.SecondsInstrument -> R.string.entry_error_seconds_instrument
+            LogbookEntryError.SecondsInstrumentSim -> R.string.entry_error_seconds_instrument_sim
+            LogbookEntryError.TakeOffCount -> R.string.entry_error_take_off_count
+            LogbookEntryError.Arrival -> R.string.entry_error_arrival_location
             else -> return
         }
 
@@ -164,5 +181,10 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun clearInputFocus() {
+        captainEditText.clearFocus()
+        operatingCapacityEditText.clearFocus()
     }
 }

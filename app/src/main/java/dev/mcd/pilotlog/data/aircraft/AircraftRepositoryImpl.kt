@@ -23,8 +23,8 @@ class AircraftRepositoryImpl @Inject constructor(
 
     override suspend fun get(): Flow<List<Aircraft>> {
         return dataStore.data.map {
-            it.aircraftsList.map { destination ->
-                destination.toDomain
+            it.aircraftsList.map { location ->
+                location.toDomain
             }
         }
     }

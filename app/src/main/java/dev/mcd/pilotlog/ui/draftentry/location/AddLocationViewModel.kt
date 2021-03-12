@@ -1,18 +1,18 @@
-package dev.mcd.pilotlog.ui.draftentry.destination
+package dev.mcd.pilotlog.ui.draftentry.location
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.mcd.pilotlog.domain.destination.Destination
-import dev.mcd.pilotlog.domain.destination.DestinationRepository
+import dev.mcd.pilotlog.domain.location.Location
+import dev.mcd.pilotlog.domain.location.LocationRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddDestinationViewModel @Inject constructor(
-    private val destinationRepository: DestinationRepository,
+class AddLocationViewModel @Inject constructor(
+    private val locationRepository: LocationRepository,
 ) : ViewModel() {
 
     sealed class State {
@@ -22,15 +22,15 @@ class AddDestinationViewModel @Inject constructor(
     val state: SharedFlow<State> get() = _state
     private val _state = MutableSharedFlow<State>()
 
-    private var destination: Destination? = null
+    private var location: Location? = null
 
-    fun onDestinationUpdated(destination: Destination) {
-        this.destination = destination
+    fun onLocationUpdated(location: Location) {
+        this.location = location
     }
 
     fun onAddClicked() {
         viewModelScope.launch {
-            destination?.let { destinationRepository.save(it) }
+            location?.let { locationRepository.save(it) }
             _state.emit(State.Dismiss)
         }
     }

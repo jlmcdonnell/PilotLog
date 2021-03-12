@@ -1,4 +1,4 @@
-package dev.mcd.pilotlog.ui.draftentry.destination
+package dev.mcd.pilotlog.ui.draftentry.location
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,29 +14,29 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import dev.mcd.pilotlog.R
-import dev.mcd.pilotlog.domain.destination.Destination
-import dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationFragmentDirections.toAddDestination
-import dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationViewModel.State.Dismiss
-import dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationViewModel.State.ShowLoadError
+import dev.mcd.pilotlog.domain.location.Location
+import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationFragmentDirections.toAddLocation
+import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationViewModel.State.Dismiss
+import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationViewModel.State.ShowLoadError
 import dev.mcd.pilotlog.util.extensions.showErrorToast
-import kotlinx.android.synthetic.main.select_destination_fragment.*
+import kotlinx.android.synthetic.main.select_location_fragment.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class SelectDestinationFragment : BottomSheetDialogFragment() {
+class SelectLocationFragment : BottomSheetDialogFragment() {
 
     private lateinit var adapter: GroupAdapter<*>
 
-    private val args: SelectDestinationFragmentArgs by navArgs()
-    private val viewModel by viewModels<SelectDestinationViewModel>()
+    private val args: SelectLocationFragmentArgs by navArgs()
+    private val viewModel by viewModels<SelectLocationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.select_destination_fragment, container)
+        return inflater.inflate(R.layout.select_location_fragment, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,9 +46,9 @@ class SelectDestinationFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupUI() {
-        setupDestinationList()
-        newDestinationButton.setOnClickListener {
-            navigateToAddDestination()
+        setupLocationList()
+        newLocationButton.setOnClickListener {
+            navigateToAddLocation()
         }
     }
 
@@ -58,34 +58,34 @@ class SelectDestinationFragment : BottomSheetDialogFragment() {
             .onEach(::updateState)
             .launchIn(lifecycleScope)
 
-        viewModel.destinations
-            .onEach(::displayDestinations)
+        viewModel.locations
+            .onEach(::displayLocations)
             .launchIn(lifecycleScope)
     }
 
-    private fun setupDestinationList() {
+    private fun setupLocationList() {
         adapter = GroupAdapter<GroupieViewHolder>()
         adapter.setOnItemClickListener { item, _ ->
-            viewModel.onDestinationSelected((item as DestinationListItem).destination)
+            viewModel.onLocationSelected((item as LocationListItem).location)
         }
 
-        destinationListView.layoutManager = LinearLayoutManager(context)
-        destinationListView.adapter = adapter
+        locationListView.layoutManager = LinearLayoutManager(context)
+        locationListView.adapter = adapter
     }
 
-    private fun navigateToAddDestination() {
-        findNavController().navigate(toAddDestination())
+    private fun navigateToAddLocation() {
+        findNavController().navigate(toAddLocation())
     }
 
-    private fun updateState(state: SelectDestinationViewModel.State) {
+    private fun updateState(state: SelectLocationViewModel.State) {
         when (state) {
             is Dismiss -> findNavController().navigateUp()
             is ShowLoadError -> requireContext().showErrorToast()
         }
     }
 
-    private fun displayDestinations(destinations: List<Destination>) {
+    private fun displayLocations(locations: List<Location>) {
         adapter.clear()
-        adapter.addAll(destinations.map { DestinationListItem(it) })
+        adapter.addAll(locations.map { LocationListItem(it) })
     }
 }

@@ -28,13 +28,13 @@ class DepartArrivalEntryView @JvmOverloads constructor(
     lateinit var onTimesUpdated: (departure: TimeString, arrival: TimeString) -> Unit
     lateinit var provideFragmentManager: () -> FragmentManager
 
-    var arrival: TimeString? = null
+    var arrival: TimeString = ""
         set(value) {
             field = value
             arrivalTimeText.text = field
         }
 
-    var departure: TimeString? = null
+    var departure: TimeString = ""
         set(value) {
             field = value
             departureTimeText.text = field
@@ -55,7 +55,7 @@ class DepartArrivalEntryView @JvmOverloads constructor(
         var minute = 0
         var hour = 0
 
-        if (!forDeparture && departure!=null) {
+        if (!forDeparture && departure.isValidTime) {
             val departureTime = timeProvider.parseTime(departure!!)
             minute = departureTime.minute
             hour = departureTime.hour
@@ -76,10 +76,7 @@ class DepartArrivalEntryView @JvmOverloads constructor(
                     } else {
                         arrival = timeString
                     }
-
-                    if (arrival.isValidTime && departure.isValidTime) {
-                        onTimesUpdated(departure!!, arrival!!)
-                    }
+                    onTimesUpdated(departure, arrival)
                 }
                 showNow(provideFragmentManager(), null)
             }

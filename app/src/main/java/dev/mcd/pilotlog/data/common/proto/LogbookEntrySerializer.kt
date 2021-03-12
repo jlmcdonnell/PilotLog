@@ -2,8 +2,8 @@ package dev.mcd.pilotlog.data.common.proto
 
 import dev.mcd.pilotlog.data.aircraft.serialized
 import dev.mcd.pilotlog.data.aircraft.toDomain
-import dev.mcd.pilotlog.data.destination.serialized
-import dev.mcd.pilotlog.data.destination.toDomain
+import dev.mcd.pilotlog.data.location.serialized
+import dev.mcd.pilotlog.data.location.toDomain
 import dev.mcd.pilotlog.domain.logbook.LogbookEntry
 import dev.mcd.pilotlog.data.entry.serializer.LogbookEntry as LogbookEntryProto
 
@@ -14,7 +14,7 @@ val LogbookEntry.serialized: LogbookEntryProto
         .setCaptain(captain)
         .setDate(date)
         .setDepartureTime(departureTime)
-        .setFromDestination(fromDestination.serialized)
+        .setDeparture(departure.serialized)
         .setHoc(holdersOperatingCapacity)
         .setLandingCount(landingCount)
         .setRemarks(remarks)
@@ -23,7 +23,7 @@ val LogbookEntry.serialized: LogbookEntryProto
         .setSecondsInstrument(secondsInstrument)
         .setSecondsInstrumentSim(secondsInstrumentSim)
         .setTakeOffCount(takeOffCount)
-        .setToDestination(toDestination.serialized)
+        .setArrival(arrival.serialized)
         .build()
 
 val LogbookEntryProto.toDomain
@@ -33,7 +33,7 @@ val LogbookEntryProto.toDomain
         captain = captain,
         date = date,
         departureTime = departureTime,
-        fromDestination = fromDestination.toDomain,
+        departure = departure.toDomain,
         holdersOperatingCapacity = hoc,
         landingCount = landingCount,
         remarks = remarks,
@@ -42,5 +42,5 @@ val LogbookEntryProto.toDomain
         secondsInstrument = secondsInstrument,
         secondsInstrumentSim = secondsInstrumentSim,
         takeOffCount = takeOffCount,
-        toDestination = toDestination.toDomain,
+        arrival = arrival.toDomain,
     )

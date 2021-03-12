@@ -17,7 +17,7 @@
     <string name="entry_save">Save</string>
     <string name="entry_discard">Discard</string>
     <string name="entry_set_date">Set Date</string>
-    <string name="entry_journey_from">From</string>
+    <string name="entry_location_departure">From</string>
     <string name="entry_journey_to">To</string>
     <string name="entry_hoc_p1">P1</string>
     <string name="entry_hoc_put">PUT</string>
@@ -28,30 +28,30 @@
     <string name="entry_error_captain">Captain entry required</string>
     <string name="entry_error_date">Date entry required</string>
     <string name="entry_error_departureTime">Departure time required</string>
-    <string name="entry_error_fromDestination">Departure location required</string>
-    <string name="entry_error_holdersOperatingCapacity">Holder\'s operating capacity required</string>
-    <string name="entry_error_landingCount">Invalid landing count</string>
-    <string name="entry_error_secondsDay">Invalid flying time (day)</string>
-    <string name="entry_error_secondsNight">Invalid flying time (night)</string>
-    <string name="entry_error_secondsInstrument">Invalid flying time (instrument)</string>
-    <string name="entry_error_secondsInstrumentSim">Invalid flying time (simulated instrument)</string>
-    <string name="entry_error_takeOffCount">Invalid take-off count</string>
-    <string name="entry_error_toDestination">Arrival location required</string>
+    <string name="entry_error_departure_location">Departure location required</string>
+    <string name="entry_error_holders_operating_capacity">Holder\'s operating capacity required</string>
+    <string name="entry_error_landing_count">Invalid landing count</string>
+    <string name="entry_error_seconds_day">Invalid flying time (day)</string>
+    <string name="entry_error_seconds_night">Invalid flying time (night)</string>
+    <string name="entry_error_seconds_instrument">Invalid flying time (instrument)</string>
+    <string name="entry_error_seconds_instrument_sim">Invalid flying time (simulated instrument)</string>
+    <string name="entry_error_take_off_count">Invalid take-off count</string>
+    <string name="entry_error_arrival_location">Arrival location required</string>
 
     <string name="aircraft_select_registration">Registration</string>
     <string name="aircraft_select_type">Type</string>
     <string name="aircraft_select_multi_engine">Multi-Engine</string>
 
-    <string name="add_destination_name">Name</string>
-    <string name="add_destination_icao">ICAO (Optional)</string>
-    <string name="add_destination_add">Add</string>
+    <string name="add_location_name">Name</string>
+    <string name="add_location_icao">ICAO (Optional)</string>
+    <string name="add_location_add">Add</string>
 
-    <string name="select_destination_filter">Filter</string>
-    <string name="select_destination_new">New</string>
+    <string name="select_location_filter">Filter</string>
+    <string name="select_location_new">New</string>
 
-    <string name="destination_view_set">Set</string>
+    <string name="location_view_set">Set</string>
 
-    <string name="destination_select">Select</string>
+    <string name="location_select">Select</string>
 
     <string name="select_aircraft_new_aircraft">New Aircraft</string>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="LocationView">
-        <attr name="destinationLabel" format="string" />
+        <attr name="locationLabel" format="string" />
     </declare-styleable>
 </resources>

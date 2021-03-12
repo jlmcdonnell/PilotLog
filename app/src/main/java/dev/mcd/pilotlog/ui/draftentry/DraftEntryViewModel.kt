@@ -89,10 +89,10 @@ class DraftEntryViewModel @Inject constructor(
             runCatching {
                 when (val result = saveLogbookEntry.execute()) {
                     is SaveLogbookEntry.Result.Success -> {
-                        _state.tryEmit(State.Dismiss)
+                        _state.emit(State.Dismiss)
                     }
                     is SaveLogbookEntry.Result.Error -> {
-                        _state.tryEmit(State.SaveError(result.error))
+                        _state.emit(State.SaveError(result.error))
                     }
                 }
             }.onFailure {

@@ -8,28 +8,28 @@
         android:id="@+id/draftEntry"
         android:name="dev.mcd.pilotlog.ui.draftentry.DraftEntryFragment">
         <action
-            android:id="@+id/toSelectDestination"
-            app:destination="@id/selectDestination" />
+            android:id="@+id/toSelectLocation"
+            app:destination="@id/selectLocation" />
         <action
             android:id="@+id/toSelectAircraft"
             app:destination="@id/selectAircraft" />
     </fragment>
 
     <dialog
-        android:id="@+id/selectDestination"
-        android:name="dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationFragment">
+        android:id="@+id/selectLocation"
+        android:name="dev.mcd.pilotlog.ui.draftentry.location.SelectLocationFragment">
         <argument
             android:name="params"
-            app:argType="dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationParams" />
+            app:argType="dev.mcd.pilotlog.ui.draftentry.location.SelectLocationParams" />
 
         <action
-            android:id="@+id/toAddDestination"
-            app:destination="@id/addDestination" />
+            android:id="@+id/toAddLocation"
+            app:destination="@id/addLocation" />
     </dialog>
 
     <dialog
-        android:id="@+id/addDestination"
-        android:name="dev.mcd.pilotlog.ui.draftentry.destination.AddDestinationFragment" />
+        android:id="@+id/addLocation"
+        android:name="dev.mcd.pilotlog.ui.draftentry.location.AddLocationFragment" />
 
     <dialog
         android:id="@+id/selectAircraft"

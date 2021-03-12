@@ -2,8 +2,8 @@ package dev.mcd.pilotlog.domain.logbook
 
 import dev.mcd.pilotlog.domain.aircraft.Aircraft
 import dev.mcd.pilotlog.domain.aircraft.isValid
-import dev.mcd.pilotlog.domain.destination.Destination
-import dev.mcd.pilotlog.domain.destination.isValid
+import dev.mcd.pilotlog.domain.location.Location
+import dev.mcd.pilotlog.domain.location.isValid
 import dev.mcd.pilotlog.domain.time.DateString
 import dev.mcd.pilotlog.domain.time.TimeString
 import dev.mcd.pilotlog.domain.time.isValidDate
@@ -14,7 +14,7 @@ data class LogbookEntry(
     val captain: String,
     val date: DateString,
     val departureTime: TimeString,
-    val fromDestination: Destination,
+    val departure: Location,
     val holdersOperatingCapacity: String,
     val landingCount: Int,
     val remarks: String,
@@ -23,7 +23,7 @@ data class LogbookEntry(
     val secondsInstrument: Int,
     val secondsInstrumentSim: Int,
     val takeOffCount: Int,
-    val toDestination: Destination,
+    val arrival: Location,
 )
 
 val LogbookEntry.validate: LogbookEntryError?
@@ -34,7 +34,7 @@ val LogbookEntry.validate: LogbookEntryError?
             captain.isBlank() -> LogbookEntryError.Captain
             date.isValidDate -> LogbookEntryError.Date
             departureTime.isBlank() -> LogbookEntryError.DepartureTime
-            fromDestination.isValid.not() -> LogbookEntryError.FromDestination
+            departure.isValid.not() -> LogbookEntryError.Departure
             holdersOperatingCapacity.isBlank() -> LogbookEntryError.HoldersOperatingCapacity
             landingCount < 0 -> LogbookEntryError.LandingCount
             secondsDay < 0 -> LogbookEntryError.SecondsDay
@@ -42,7 +42,7 @@ val LogbookEntry.validate: LogbookEntryError?
             secondsInstrument < 0 -> LogbookEntryError.SecondsInstrument
             secondsInstrumentSim < 0 -> LogbookEntryError.SecondsInstrumentSim
             takeOffCount < 0 -> LogbookEntryError.TakeOffCount
-            toDestination.isValid.not() -> LogbookEntryError.ToDestination
+            arrival.isValid.not() -> LogbookEntryError.Arrival
             else -> null
         }
     }

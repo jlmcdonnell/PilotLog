@@ -1,25 +1,25 @@
-package dev.mcd.pilotlog.ui.draftentry.destination
+package dev.mcd.pilotlog.ui.draftentry.location
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.mcd.pilotlog.domain.destination.Destination
-import dev.mcd.pilotlog.domain.destination.DestinationRepository
 import dev.mcd.pilotlog.domain.draftentry.DraftEntryRepository
-import dev.mcd.pilotlog.ui.draftentry.destination.SelectDestinationParams.ModeFrom
+import dev.mcd.pilotlog.domain.location.Location
+import dev.mcd.pilotlog.domain.location.LocationRepository
+import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationParams.ModeDeparture
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-enum class SelectDestinationParams {
-    ModeFrom,
-    ModeTo
+enum class SelectLocationParams {
+    ModeDeparture,
+    ModeArrival
 }
 
 @HiltViewModel
-class SelectDestinationViewModel @Inject constructor(
-    private val destinationRepository: DestinationRepository,
+class SelectLocationViewModel @Inject constructor(
+    private val locationRepository: LocationRepository,
     private val draftEntryRepository: DraftEntryRepository,
 ) : ViewModel() {
 
@@ -28,10 +28,10 @@ class SelectDestinationViewModel @Inject constructor(
         object ShowLoadError : State()
     }
 
-    lateinit var params: SelectDestinationParams
+    lateinit var params: SelectLocationParams
 
-    val destinations = flow {
-        destinationRepository.get()
+    val locations = flow {
+        locationRepository.get()
             .flowOn(Dispatchers.IO)
             .catch { _state.emit(State.ShowLoadError) }
             .collect(::emit)
@@ -41,12 +41,12 @@ class SelectDestinationViewModel @Inject constructor(
 
     private val _state = MutableSharedFlow<State>()
 
-    fun onDestinationSelected(destination: Destination) {
+    fun onLocationSelected(location: Location) {
         viewModelScope.launch {
-            if (params==ModeFrom) {
-                draftEntryRepository.updateFromDestination(destination)
+            if (params==ModeDeparture) {
+                draftEntryRepository.updateDeparture(location)
             } else {
-                draftEntryRepository.updateToDestination(destination)
+                draftEntryRepository.updateArrival(location)
             }
             _state.emit(State.Dismiss)
         }

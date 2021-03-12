@@ -6,7 +6,7 @@ enum class LogbookEntryError {
     Captain,
     Date,
     DepartureTime,
-    FromDestination,
+    Departure,
     HoldersOperatingCapacity,
     LandingCount,
     Remarks,
@@ -15,5 +15,5 @@ enum class LogbookEntryError {
     SecondsInstrument,
     SecondsInstrumentSim,
     TakeOffCount,
-    ToDestination,
+    Arrival,
 }

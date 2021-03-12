@@ -1,4 +1,4 @@
-package dev.mcd.pilotlog.ui.draftentry.destination
+package dev.mcd.pilotlog.ui.draftentry.location
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,27 +11,27 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.mcd.pilotlog.R
-import dev.mcd.pilotlog.domain.destination.Destination
-import dev.mcd.pilotlog.ui.draftentry.destination.AddDestinationViewModel.State.Dismiss
+import dev.mcd.pilotlog.domain.location.Location
+import dev.mcd.pilotlog.ui.draftentry.location.AddLocationViewModel.State.Dismiss
 import dev.mcd.pilotlog.util.delegates.EditTextDelegate
-import kotlinx.android.synthetic.main.add_destination_fragment.*
+import kotlinx.android.synthetic.main.add_location_fragment.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class AddDestinationFragment : BottomSheetDialogFragment() {
+class AddLocationFragment : BottomSheetDialogFragment() {
 
     private var name by EditTextDelegate { nameEditText }
     private var icao by EditTextDelegate { icaoEditText }
 
-    private val viewModel by viewModels<AddDestinationViewModel>()
+    private val viewModel by viewModels<AddLocationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.add_destination_fragment, container)
+        return inflater.inflate(R.layout.add_location_fragment, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,10 +42,10 @@ class AddDestinationFragment : BottomSheetDialogFragment() {
 
     private fun setupUI() {
         nameEditText.addTextChangedListener {
-            updateDestination()
+            updateLocation()
         }
         icaoEditText.addTextChangedListener {
-            updateDestination()
+            updateLocation()
         }
         addButton.setOnClickListener {
             viewModel.onAddClicked()
@@ -58,7 +58,7 @@ class AddDestinationFragment : BottomSheetDialogFragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun handleState(state: AddDestinationViewModel.State) {
+    private fun handleState(state: AddLocationViewModel.State) {
         when (state) {
             Dismiss -> findNavController().navigateUp()
         }
@@ -68,10 +68,10 @@ class AddDestinationFragment : BottomSheetDialogFragment() {
         return name.isNotBlank()
     }
 
-    private fun updateDestination() {
+    private fun updateLocation() {
         if (isValid()) {
-            val destination = Destination(name.trim(), icao.trim())
-            viewModel.onDestinationUpdated(destination)
+            val location = Location(name.trim(), icao.trim())
+            viewModel.onLocationUpdated(location)
             addButton.isEnabled = true
         } else {
             addButton.isEnabled = false
