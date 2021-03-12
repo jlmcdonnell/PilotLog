@@ -25,7 +25,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/hocP1"
+        android:id="@+id/operatingCapacityPreset1"
         style="@style/Widget.MaterialComponents.Chip.Action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,13 +35,13 @@
         app:layout_constraintTop_toBottomOf="@id/operatingCapacityLayout" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/hocPut"
+        android:id="@+id/operatingCapacityPreset2"
         style="@style/Widget.MaterialComponents.Chip.Action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/entry_hoc_put"
-        app:layout_constraintStart_toEndOf="@id/hocP1"
-        app:layout_constraintTop_toTopOf="@id/hocP1" />
+        app:layout_constraintStart_toEndOf="@id/operatingCapacityPreset1"
+        app:layout_constraintTop_toTopOf="@id/operatingCapacityPreset1" />
 
 </merge>

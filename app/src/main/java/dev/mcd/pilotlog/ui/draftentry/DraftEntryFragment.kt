@@ -17,7 +17,6 @@ import dev.mcd.pilotlog.domain.aircraft.isValid
 import dev.mcd.pilotlog.domain.logbook.LogbookEntry
 import dev.mcd.pilotlog.domain.logbook.LogbookEntryError
 import dev.mcd.pilotlog.domain.time.DateString
-import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.toSelectAircraft
 import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.toSelectLocation
 import dev.mcd.pilotlog.ui.draftentry.DraftEntryViewModel.State
 import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationParams
@@ -47,24 +46,23 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         operatingCapacityView.onOperatingCapacityChanged = {
             viewModel.onOperatingCapacityChanged(it)
         }
+        operatingCapacityPreset1.setOnClickListener {
+            viewModel.onOperatingCapacityChanged(operatingCapacityPreset1.text.toString())
+        }
+        operatingCapacityPreset2.setOnClickListener {
+            viewModel.onOperatingCapacityChanged(operatingCapacityPreset2.text.toString())
+        }
         departureLocation.onSelectLocationClicked = {
-            selectDeparture()
+            viewModel.onSelectDepartureClicked()
         }
         arrivalLocation.onSelectLocationClicked = {
-            selectArrival()
+            viewModel.onSelectArrivalClicked()
         }
         aircraftView.setOnClickListener {
-            clearInputFocus()
-            findNavController().navigate(toSelectAircraft())
+            viewModel.onSelectAircraftClicked()
         }
         dateView.setOnClickListener {
-            showDatePicker()
-        }
-        hocP1.setOnClickListener {
-            operatingCapacityEditText.setText(hocP1.text)
-        }
-        hocPut.setOnClickListener {
-            operatingCapacityEditText.setText(hocPut.text)
+            viewModel.onSelectDateClicked()
         }
         saveButton.setOnClickListener {
             viewModel.onSaveClicked()
@@ -87,6 +85,17 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
             .launchIn(lifecycleScope)
     }
 
+    private fun handleState(state: State) {
+        when (state) {
+            is State.Dismiss -> findNavController().navigateUp()
+            is State.SaveError -> displayLogEntryError(state.logbookEntryError)
+            is State.SelectAircraft -> selectAircraft()
+            is State.SelectArrival -> selectArrival()
+            is State.SelectDate -> selectDate()
+            is State.SelectDeparture -> selectDeparture()
+        }
+    }
+
     private fun selectDeparture() {
         clearInputFocus()
         findNavController().navigate(toSelectLocation(SelectLocationParams.ModeDeparture))
@@ -97,7 +106,12 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         findNavController().navigate(toSelectLocation(SelectLocationParams.ModeArrival))
     }
 
-    private fun showDatePicker() {
+    private fun selectAircraft() {
+        clearInputFocus()
+        findNavController().navigate(DraftEntryFragmentDirections.toSelectAircraft())
+    }
+
+    private fun selectDate() {
         clearInputFocus()
 
         MaterialDatePicker.Builder.datePicker()
@@ -145,13 +159,6 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         } else {
             setAircraftButton.isVisible = true
             aircraftLabel.isVisible = true
-        }
-    }
-
-    private fun handleState(state: State) {
-        when (state) {
-            is State.Dismiss -> findNavController().navigateUp()
-            is State.SaveError -> displayLogEntryError(state.logbookEntryError)
         }
     }
 
