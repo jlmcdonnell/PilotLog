@@ -37,6 +37,7 @@
     <string name="entry_error_seconds_instrument_sim">Invalid flying time (simulated instrument)</string>
     <string name="entry_error_take_off_count">Invalid take-off count</string>
     <string name="entry_error_arrival_location">Arrival location required</string>
+    <string name="entry_error_remarks">Invalid remarks</string>
 
     <string name="aircraft_select_registration">Registration</string>
     <string name="aircraft_select_type">Type</string>
