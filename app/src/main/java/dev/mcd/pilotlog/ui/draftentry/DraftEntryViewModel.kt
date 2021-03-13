@@ -74,12 +74,18 @@ class DraftEntryViewModel @Inject constructor(
         }
     }
 
+    fun onTakeOffLandingCountUpdated(takeOffs: Int, landings: Int) {
+        saveEntry {
+            it.copy(takeOffCount = takeOffs, landingCount = landings)
+        }
+    }
+
+
     fun onDiscardClicked() {
         viewModelScope.launch {
             draftEntryRepository.deleteEntry()
         }
     }
-
 
     fun onSaveClicked() {
         viewModelScope.launch {

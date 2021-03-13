@@ -22,6 +22,10 @@
     <string name="entry_hoc_p1">P1</string>
     <string name="entry_hoc_put">PUT</string>
     <string name="entry_set_time">Set Time</string>
+    <string name="entry_departure_utc">Departure (UTC)</string>
+    <string name="entry_arrival_utc">Arrival (UTC)</string>
+    <string name="entry_takeoff_hint">Take-offs</string>
+    <string name="entry_landings_hint">Landings</string>
     <string name="entry_error_dialog_title">Unable to save entry</string>
     <string name="entry_error_aircraft">Aircraft entry required</string>
     <string name="entry_error_arrivalTime">Arrival time required</string>
@@ -57,7 +61,6 @@
     <string name="select_aircraft_new_aircraft">New Aircraft</string>
 
     <string name="add_aircraft_add">Add Aircraft</string>
+
     <string name="new_entry_set_aircraft">Set Aircraft</string>
-    <string name="entry_departure_utc">Departure (UTC)</string>
-    <string name="entry_arrival_utc">Arrival (UTC)</string>
 </resources>

@@ -67,6 +67,9 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         saveButton.setOnClickListener {
             viewModel.onSaveClicked()
         }
+        takeOffLandingEntryView.onTakeOffLandingCountChanged = { takeOffs, landings ->
+            viewModel.onTakeOffLandingCountUpdated(takeOffs, landings)
+        }
         with(departArrivalEntryView) {
             provideFragmentManager = { childFragmentManager }
             onTimesUpdated = { depart, arrive ->
