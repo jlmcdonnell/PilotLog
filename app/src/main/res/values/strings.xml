@@ -63,4 +63,20 @@
     <string name="add_aircraft_add">Add Aircraft</string>
 
     <string name="new_entry_set_aircraft">Set Aircraft</string>
+
+    <string name="flying_time_entry_day">Day</string>
+    <string name="flying_time_entry_night">Night</string>
+    <string name="flying_time_entry_instrument">Instrument</string>
+    <string name="flying_time_entry_instrument_sim">Instrument (simulated)</string>
+    <string name="flying_time_entry_save">Save</string>
+
+    <string name="flying_time_day">Day</string>
+    <string name="flying_time_night">Night</string>
+    <string name="flying_time_instrument">Instrument</string>
+    <string name="flying_time_instrument_sim">Instrument (simulated)</string>
+    <string name="flying_time_set">Set Flying Times</string>
+
+    <string name="duration_hours">Hours</string>
+    <string name="duration_minutes">MM</string>
+    <string name="duration_seconds">SS</string>
 </resources>

@@ -32,4 +32,3 @@ class TakeoffLandingEntryView @JvmOverloads constructor(
         landingsEditText.addTextChangedListener { onUpdate() }
     }
 }
-

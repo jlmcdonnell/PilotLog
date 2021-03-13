@@ -43,7 +43,7 @@ class SelectLocationViewModel @Inject constructor(
 
     fun onLocationSelected(location: Location) {
         viewModelScope.launch {
-            if (params==ModeDeparture) {
+            if (params == ModeDeparture) {
                 draftEntryRepository.updateDeparture(location)
             } else {
                 draftEntryRepository.updateArrival(location)

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/toSelectAircraft"
             app:destination="@id/selectAircraft" />
+        <action
+            android:id="@+id/toFlyingTimeEntry"
+            app:destination="@id/flyingTimeEntry" />
     </fragment>
 
     <dialog
@@ -42,5 +45,9 @@
     <dialog
         android:id="@+id/addAircraft"
         android:name="dev.mcd.pilotlog.ui.draftentry.aircraft.AddAircraftFragment" />
+
+    <dialog
+        android:id="@+id/flyingTimeEntry"
+        android:name="dev.mcd.pilotlog.ui.draftentry.flyingtime.FlyingTimeEntryFragment" />
 
 </navigation>

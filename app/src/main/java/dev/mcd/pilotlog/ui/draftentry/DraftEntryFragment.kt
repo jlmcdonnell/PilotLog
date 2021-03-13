@@ -17,7 +17,7 @@ import dev.mcd.pilotlog.domain.aircraft.isValid
 import dev.mcd.pilotlog.domain.logbook.LogbookEntry
 import dev.mcd.pilotlog.domain.logbook.LogbookEntryError
 import dev.mcd.pilotlog.domain.time.DateString
-import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.toSelectLocation
+import dev.mcd.pilotlog.ui.draftentry.DraftEntryFragmentDirections.*
 import dev.mcd.pilotlog.ui.draftentry.DraftEntryViewModel.State
 import dev.mcd.pilotlog.ui.draftentry.location.SelectLocationParams
 import kotlinx.android.synthetic.main.draft_entry_fragment.*
@@ -70,6 +70,9 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
         takeOffLandingEntryView.onTakeOffLandingCountChanged = { takeOffs, landings ->
             viewModel.onTakeOffLandingCountUpdated(takeOffs, landings)
         }
+        flyingTimeView.onUpdateFlyingTimes = {
+            viewModel.onUpdateFlyingTimesClicked()
+        }
         with(departArrivalEntryView) {
             provideFragmentManager = { childFragmentManager }
             onTimesUpdated = { depart, arrive ->
@@ -96,6 +99,7 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
             is State.SelectArrival -> selectArrival()
             is State.SelectDate -> selectDate()
             is State.SelectDeparture -> selectDeparture()
+            is State.UpdateFlyingTimes -> updateFlyingTimes()
         }
     }
 
@@ -111,7 +115,12 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
 
     private fun selectAircraft() {
         clearInputFocus()
-        findNavController().navigate(DraftEntryFragmentDirections.toSelectAircraft())
+        findNavController().navigate(toSelectAircraft())
+    }
+
+    private fun updateFlyingTimes() {
+        clearInputFocus()
+        findNavController().navigate(toFlyingTimeEntry())
     }
 
     private fun selectDate() {
@@ -143,6 +152,8 @@ class DraftEntryFragment : Fragment(R.layout.draft_entry_fragment) {
 
         departArrivalEntryView.arrival = logbookEntry.arrivalTime
         departArrivalEntryView.departure = logbookEntry.departureTime
+
+        flyingTimeView.setEntry(logbookEntry)
     }
 
     private fun displayEntryDate(date: DateString) {

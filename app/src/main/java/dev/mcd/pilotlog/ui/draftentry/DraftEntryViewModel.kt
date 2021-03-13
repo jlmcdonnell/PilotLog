@@ -28,6 +28,7 @@ class DraftEntryViewModel @Inject constructor(
         object SelectArrival : State()
         object SelectDeparture : State()
         object SelectDate : State()
+        object UpdateFlyingTimes : State()
         class SaveError(val logbookEntryError: LogbookEntryError) : State()
     }
 
@@ -80,7 +81,6 @@ class DraftEntryViewModel @Inject constructor(
         }
     }
 
-
     fun onDiscardClicked() {
         viewModelScope.launch {
             draftEntryRepository.deleteEntry()
@@ -100,7 +100,6 @@ class DraftEntryViewModel @Inject constructor(
                 }
             }.onFailure {
                 Timber.e(it, "saving entry")
-
             }
         }
     }
@@ -126,6 +125,12 @@ class DraftEntryViewModel @Inject constructor(
     fun onSelectDateClicked() {
         viewModelScope.launch {
             _state.emit(State.SelectDate)
+        }
+    }
+
+    fun onUpdateFlyingTimesClicked() {
+        viewModelScope.launch {
+            _state.emit(State.UpdateFlyingTimes)
         }
     }
 

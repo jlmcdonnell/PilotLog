@@ -31,10 +31,10 @@ class AircraftRepositoryImpl @Inject constructor(
 
     override suspend fun save(aircraft: Aircraft) {
         val existing = dataStore.data.first().aircraftsList.indexOfFirst {
-            it.toDomain==aircraft
+            it.toDomain == aircraft
         }
 
-        if (existing!=-1) {
+        if (existing != -1) {
             return
         }
 
@@ -50,7 +50,7 @@ class AircraftRepositoryImpl @Inject constructor(
             it.toBuilder()
                 .removeAircrafts(
                     it.aircraftsList.indexOfFirst { d ->
-                        d.toDomain==aircraft
+                        d.toDomain == aircraft
                     }
                 )
                 .build()

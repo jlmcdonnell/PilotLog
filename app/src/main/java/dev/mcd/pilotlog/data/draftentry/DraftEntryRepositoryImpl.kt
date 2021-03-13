@@ -17,7 +17,7 @@ class DraftEntryRepositoryImpl @Inject constructor(
 
     override suspend fun updateEntry(logbookEntry: LogbookEntry) {
         val existing = getEntry()
-        if (logbookEntry!=existing) {
+        if (logbookEntry != existing) {
             dataStore.save(logbookEntry)
         }
     }

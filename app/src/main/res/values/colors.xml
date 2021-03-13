@@ -10,5 +10,7 @@
     <color name="blue0">#3F51B5</color>
     <color name="blue1">#25358A</color>
     <color name="red0">#C60919</color>
+    <color name="green0">#3DAE00</color>
+    <color name="purple0">#A200AE</color>
     <color name="grey0Transparent">#11EDEDED</color>
 </resources>

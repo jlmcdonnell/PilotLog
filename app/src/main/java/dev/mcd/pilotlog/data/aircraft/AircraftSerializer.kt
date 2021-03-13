@@ -25,7 +25,7 @@ val Aircraft.serialized: AircraftProto
     get() = AircraftProto.newBuilder()
         .setType(type)
         .setRegistration(registration)
-        .setIsMulti(engineType==EngineType.Multi)
+        .setIsMulti(engineType == EngineType.Multi)
         .build()
 
 val AircraftProto.toDomain
